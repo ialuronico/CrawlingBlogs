@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 from scrapy.selector import HtmlXPathSelector
 from scrapy.spiders import BaseSpider
@@ -12,7 +12,7 @@ class BlogSpider(BaseSpider):
     name = "blog_spider"
     start_urls = []
     base_url = "http://www.nomadicmatt.com/page/"
-    for i in range(1,100):
+    for i in range(1,100): # Get results from the first 100 pages
         url = base_url + str(i) + "/?s"
         start_urls.append(url)
     
@@ -30,7 +30,7 @@ class BlogSpider(BaseSpider):
             this_text = this_text.text_content().strip()
             this_text = unicodedata.normalize('NFKD', u"" + this_text)
             this_text = this_text.encode('ascii', errors='backslashreplace')
-            # substitue apostrope
+            # substitute symbols
             this_text = this_text.replace("\u2019", "'")
             this_text = this_text.replace('\\xa0', ' ')
             # add it up
